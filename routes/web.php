@@ -20,3 +20,11 @@ Route::prefix('/alunos')->group(function () {
     Route::get('deletar/{id}', 'Alunos@deletar')->name('aluno-deletar');
     Route::get('/{id}', 'Alunos@selecionar')->name('aluno-id');
 });
+
+Route::prefix('/cursos')->group(function () {
+    Route::get('/', 'Cursos@listar')->name('curso-listar');
+    Route::get('cadastrar', 'Cursos@showInsert')->name('curso-cadastrar');
+    Route::post('insert', 'Cursos@insert')->name('curso-insert');
+    Route::get('deletar/{id}', 'Cursos@deletar')->name('curso-deletar');
+    Route::get('/{id}', 'Cursos@selecionar')->name('curso-id');
+});

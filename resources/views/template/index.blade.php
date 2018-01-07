@@ -52,8 +52,8 @@
             <li> <a href="#cursos-nav-list" data-toggle="collapse" aria-expanded="false"><i class="icon-form"></i><span>Cursos</span>
                 <div class="arrow pull-right"><i class="fa fa-angle-down"></i></div></a>
               <ul id="cursos-nav-list" class="collapse list-unstyled">
-                <li> <a href="#">Cadastrar</a></li>
-                <li> <a href="#">Listar</a></li>
+                  <li> <a href="{{route('curso-cadastrar')}}">Cadastrar</a></li>
+                  <li> <a href="{{route('curso-listar')}}">Listar</a></li>
               </ul>
             </li>
             <li> <a href="#certificados-nav-list" data-toggle="collapse" aria-expanded="false"><i class="icon-list-1"></i><span>Certificado</span>

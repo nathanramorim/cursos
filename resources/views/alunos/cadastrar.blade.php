@@ -48,7 +48,7 @@
             </div>
             <div class="form-group row">
             <div class="col-sm-2 offset-sm-10">
-                <a href="{{route('home')}}" class="btn btn-secondary">Cancelar</a>
+                <a href="{{url('alunos')}}" class="btn btn-secondary">Cancelar</a>
                 <button type="submit" class="btn btn-primary">Salvar</button>
             </div>
             </div>

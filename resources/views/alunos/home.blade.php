@@ -31,7 +31,7 @@
                     <td>{{$aluno->telefone}}</td>
                     <td>{{$data_n}}</td>
                     <td>
-                        <a class="btn btn-sm btn-info" href="{{url('alunos/deletar/'.$aluno->id)}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                        <a class="btn btn-sm btn-info" href="{{url('alunos/'.$aluno->id)}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                         <a class="btn btn-sm btn-danger" href="{{url('alunos/deletar/'.$aluno->id)}}"><i class="fa fa-times" aria-hidden="true"></i></a>
                     </td>
                 </tr>

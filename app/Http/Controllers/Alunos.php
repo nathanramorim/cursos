@@ -43,7 +43,7 @@ class Alunos extends Controller
     
     public function selecionar($id){
         $aluno = new AlunosModel;
-        $return = $aluno::where('id',$id)->get();
-        return view('aluno',['aluno'=>$return]);
+        $return = $aluno::find($id);
+        return view('alunos.editar',['aluno'=>$return]);
     }
 }
