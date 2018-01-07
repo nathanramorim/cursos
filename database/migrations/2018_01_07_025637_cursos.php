@@ -13,7 +13,12 @@ class Cursos extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('curso', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('nome');
+            $table->integer('inativo');
+           
+        });
     }
 
     /**
@@ -23,6 +28,6 @@ class Cursos extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('curso');
     }
 }
