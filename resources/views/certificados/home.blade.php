@@ -13,8 +13,8 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>ID Aluno</th>
-                    <th>ID Curso</th>
+                    <th>Aluno</th>
+                    <th>Curso</th>
                     <th>Data de Matricula</th>
                     <th>Data de Conclusao</th>
                     <th>Nota</th>
@@ -25,8 +25,8 @@
                 @foreach ($all as $certificado)
                 <tr>
                     <th scope="row">{{$certificado->id}}</th>
-                    <td>{{$certificado->aluno_id}}</td>
-                    <td>{{$certificado->curso_id}}</td>
+                    <td>{{$certificado->nome}}</td>
+                    <td>{{$certificado->nome_curso}}</td>
                     <td>{{$certificado->datamatricula}}</td>
                     <td>{{$certificado->dataconclusao}}</td>
                     <td>{{$certificado->nota}}</td>
@@ -38,6 +38,7 @@
                 @endforeach
             </tbody>
         </table>
+        {{$all->links()}}
         </div>
     </div>
 </div> 
