@@ -13,20 +13,11 @@ class Cursos extends Controller
     }
 
     public function insert(Request $request){
-        $date = Carbon::now()->toDateTimeString();
-        $data_nascimento = explode('-',$request->input('data_nascimento'));
-        $data_nascimento =  $data_nascimento[2].'-'.$data_nascimento[1].'-'.$data_nascimento[0];
         $cursos = new CursosModel;
-        $cursos->matriculado = $request->input('matriculado');
-        $cursos->datacadastro = $date;
         $cursos->nome = $request->input('nome');
-        $cursos->email = $request->input('email');
-        $cursos->senha = $request->input('senha');
-        $cursos->telefone = $request->input('telefone');
-        $cursos->data_nascimento = $data_nascimento;
+        $cursos->inativo = ($request->input('disponivel') == 1) ? $request->input('disponivel') : 0;
         $cursos->save();
-        return redirect('/cursos');
-
+        return redirect('cursos');
     }
 
     public function listar (){
@@ -36,14 +27,24 @@ class Cursos extends Controller
     }
 
     public function deletar($id){
-        $aluno = new CursosModel;
-        $aluno::find($id)->delete();
+        $curso = new CursosModel;
+        $curso::find($id)->delete();
+        return redirect('cursos');
+    }
+
+    public function atualizar(Request $request){
+        $date = Carbon::now()->toDateTimeString();
+        $curso = new CursosModel;
+        $new = $curso::find($request->input('id'));
+        $new->nome = $request->input('nome');
+        $new->inativo = ($request->input('disponivel') == 1) ? $request->input('disponivel') : 0;
+        $new->save();
         return redirect('cursos');
     }
     
     public function selecionar($id){
-        $aluno = new CursosModel;
-        $return = $aluno::find($id);
+        $curso = new CursosModel;
+        $return = $curso::find($id);
         return view('cursos.editar',['curso'=>$return]);
     }
 }

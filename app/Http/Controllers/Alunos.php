@@ -40,6 +40,22 @@ class Alunos extends Controller
         $aluno::find($id)->delete();
         return redirect('alunos');
     }
+    public function atualizar(Request $request){
+        $date = Carbon::now()->toDateTimeString();
+        $aluno = new AlunosModel;
+        $new = $aluno::find($request->input('id'));
+        $data_nascimento = explode('-',$request->input('data_nascimento'));
+        $data_nascimento =  $data_nascimento[2].'-'.$data_nascimento[1].'-'.$data_nascimento[0];
+        $new->matriculado = $request->input('matriculado');
+        $new->datacadastro = $date;
+        $new->nome = $request->input('nome');
+        $new->email = $request->input('email');
+        $new->senha = $request->input('senha');
+        $new->telefone = $request->input('telefone');
+        $new->data_nascimento = $data_nascimento;
+        $new->save();
+        return redirect('alunos');
+    }
     
     public function selecionar($id){
         $aluno = new AlunosModel;
