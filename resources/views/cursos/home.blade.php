@@ -21,7 +21,7 @@
                 @foreach ($all as $curso)
                 <tr>
                     <th scope="row">{{$curso->id}}</th>
-                    <td>{{$curso->nome}}</td>
+                    <td>{{$curso->nome_curso}}</td>
                     <td>
                         <a class="btn btn-sm btn-info" href="{{url('cursos/'.$curso->id)}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                         <a class="btn btn-sm btn-danger" href="{{url('cursos/deletar/'.$curso->id)}}"><i class="fa fa-times" aria-hidden="true"></i></a>

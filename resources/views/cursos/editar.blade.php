@@ -14,7 +14,7 @@
 
             <div class="form-group row">
                 <div class="col-sm-12">
-                    {{ Form::text('nome',$curso->nome,['placeholder' => 'Digite o nome do curso','class'=>'form-control']) }}
+                    {{ Form::text('nome',$curso->nome_curso,['placeholder' => 'Digite o nome do curso','class'=>'form-control']) }}
                 </div>
             </div>
             <div class="line"></div>

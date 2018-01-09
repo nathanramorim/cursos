@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\AlunosModel;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class Alunos extends Controller
 {
@@ -35,6 +36,20 @@ class Alunos extends Controller
         return view('alunos.home',['all'=>$all]);
     }
 
+    public function certificados(){
+        $alunos = new AlunosModel;
+        $all = $alunos::all();
+        return view('alunos.certificados',['all'=>$all]);
+
+    }
+
+    public function numeroCertificados($aluno_id = null){
+        $result = DB::table('aluno_certificado')
+        ->join('aluno', 'aluno.id', '=', 'aluno_certificado.aluno_id')
+        ->where('aluno.id',$aluno_id)->count();
+        return $result;
+    }
+
     public function deletar($id){
         $aluno = new AlunosModel;
         $aluno::find($id)->delete();
@@ -62,4 +77,27 @@ class Alunos extends Controller
         $return = $aluno::find($id);
         return view('alunos.editar',['aluno'=>$return]);
     }
+
+    public function seed($qtd,$senha){
+        $date = Carbon::now()->toDateTimeString();
+        $cont = 0;
+        if($senha == 'root'){
+            for ($i=1; $i <= $qtd  ; $i++) { 
+                $aluno = new AlunosModel();
+                $aluno->nome = str_random(10);
+                $aluno->matriculado = rand();
+                $aluno->email =  str_random(10).'@gmail.com';
+                $aluno->telefone = '(31) 99999-9999';
+                $aluno->senha = '123456';
+                $aluno->datacadastro = $date;
+                $aluno->data_nascimento = $date;
+                $aluno->save();
+                $cont++;
+            }
+            echo $cont.' cargas feitas!';
+        }else{
+            return redirect('alunos');
+        }
+    }
+    
 }

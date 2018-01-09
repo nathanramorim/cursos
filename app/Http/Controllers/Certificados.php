@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 use App\CertificadosModel;
 use App\CursosModel;
 use App\AlunosModel;
 
 class Certificados extends Controller
 {
-    public function index()
+   
+    public function listar()
     {
         $certificados = DB::table('aluno_certificado')
                             ->join('aluno', 'aluno.id', '=', 'aluno_certificado.aluno_id')
@@ -38,15 +40,7 @@ class Certificados extends Controller
         return redirect('certificados');
     }
 
-    public function listar (){
-        $certificados = new CertificadosModel;
-        $all = $certificados::all()
-        ->with('certificado') // bring along details of the friend
-        ->join('aluno', 'aluno.id', '=', 'certificado.aluno_id')
-        ->get(['aluno.*']); // exclude extra details from friends table
-        var_dump($all).die();
-        return view('certificados.home',['all'=>$all]);
-    }
+   
 
     public function deletar($id){
         $certificados = new CertificadosModel;
@@ -77,5 +71,25 @@ class Certificados extends Controller
         $data = explode('-',$data);
         $data =  $data[2].'-'.$data[1].'-'.$data[0];
         return $data;
+    }
+
+    public function seed($max_id,$senha){
+        $date = Carbon::now()->toDateTimeString();
+        $cont = 0;
+        if($senha == 'root'){
+            for ($i=3; $i <= $max_id ; $i++) { 
+                $certificado = new CertificadosModel();
+                $certificado->aluno_id = 12;
+                $certificado->curso_id = $i;
+                $certificado->datamatricula = $date;
+                $certificado->dataconclusao = $date;
+                $certificado->nota = 78;
+                $certificado->save();
+                $cont++;
+            }
+            echo $cont.' cargas feitas!';
+        }else{
+            return redirect('alunos');
+        }
     }
 }

@@ -47,6 +47,7 @@
               <ul id="alunos-nav-list" class="collapse list-unstyled">
                 <li> <a href="{{route('aluno-cadastrar')}}">Cadastrar</a></li>
                 <li> <a href="{{route('aluno-listar')}}">Listar</a></li>
+                <li> <a href="{{route('aluno-certificado')}}">Certificados</a></li>
               </ul>
             </li>
             <li> <a href="#cursos-nav-list" data-toggle="collapse" aria-expanded="false"><i class="icon-form"></i><span>Cursos</span>
