@@ -15,6 +15,7 @@ Route::get('/','Alunos@listar')->name('home');
 
 Route::prefix('/alunos')->group(function () {
     Route::get('/', 'Alunos@listar')->name('aluno-listar');
+    Route::get('page/{page}', 'Alunos@pagination')->name('aluno-pagination');
     Route::get('certificados', 'Alunos@certificados')->name('aluno-certificado');
     Route::get('cadastrar', 'Alunos@showInsert')->name('aluno-cadastrar');
     Route::post('insert', 'Alunos@insert')->name('aluno-insert');
@@ -26,6 +27,7 @@ Route::prefix('/alunos')->group(function () {
 
 Route::prefix('/cursos')->group(function () {
     Route::get('/', 'Cursos@listar')->name('curso-listar');
+    Route::get('certificados', 'Cursos@certificados')->name('curso-certificado');
     Route::get('cadastrar', 'Cursos@showInsert')->name('curso-cadastrar');
     Route::post('insert', 'Cursos@insert')->name('curso-insert');
     Route::get('deletar/{id}', 'Cursos@deletar')->name('curso-deletar');

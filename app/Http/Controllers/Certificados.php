@@ -77,10 +77,10 @@ class Certificados extends Controller
         $date = Carbon::now()->toDateTimeString();
         $cont = 0;
         if($senha == 'root'){
-            for ($i=3; $i <= $max_id ; $i++) { 
+            for ($i=12; $i <= $max_id ; $i++) { 
                 $certificado = new CertificadosModel();
-                $certificado->aluno_id = 12;
-                $certificado->curso_id = $i;
+                $certificado->aluno_id = 13;
+                $certificado->curso_id = 3;
                 $certificado->datamatricula = $date;
                 $certificado->dataconclusao = $date;
                 $certificado->nota = 78;

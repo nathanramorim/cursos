@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\CursosModel;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class Cursos extends Controller
 {
@@ -25,6 +26,30 @@ class Cursos extends Controller
         $all = $cursos::all();
         return view('cursos.home',['all'=>$all]);
     }
+
+    public function certificados(){
+        $cursos = new CursosModel;
+        $all = $cursos::all();
+        $n = 0;
+        foreach ($all  as $curso){
+            $allCursos[$n] = [
+                'id' => $curso->id,
+                'nome' => $curso->nome_curso,
+                'certificados' => $this->numeroCertificados($curso->id)
+            ];
+            $n++;
+        }
+        return view('cursos.certificados',['all'=>$allCursos]);
+
+    }
+
+    public function numeroCertificados($curso_id = null){
+        $result = DB::table('aluno_certificado')
+        ->join('curso', 'curso.id', '=', 'aluno_certificado.curso_id')
+        ->where('curso.id',$curso_id)->count();
+        return $result;
+    }
+
 
     public function deletar($id){
         $curso = new CursosModel;

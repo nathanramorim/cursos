@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\AlunosModel;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Collection;
 
 class Alunos extends Controller
 {
@@ -30,16 +31,91 @@ class Alunos extends Controller
 
     }
 
+    public function pagination ($page){
+        $alunos = new AlunosModel;
+        $all = $alunos::all();
+        $n = 0;
+        foreach ($all  as $aluno){
+            $data_n = explode('-',$aluno->data_nascimento);
+            $data_n = $data_n[2].'-'.$data_n[1].'-'.$data_n[0];
+            
+            $allAlunos[$n] = [
+                'id' => $aluno->id,
+                'matricula' => $aluno->matriculado,
+                'nome' => $aluno->nome,
+                'email' => $aluno->email,
+                'datanascimento' => $data_n,
+                'telefone' => $aluno->telefone,
+                'certificados' => $this->numeroCertificados($aluno->id)
+            ];
+            $n++;
+        }
+        $allAlunos = collect($allAlunos);
+        $pages = sizeOf($allAlunos)/10;
+        if (!is_int($pages)){
+            $pages++;
+        }
+        for ($forPages =1; $forPages <= $pages ; $forPages++) { 
+            $numPages[$forPages] = $forPages;
+        }
+        $chunk = $allAlunos->forPage($page,10);
+        
+        $allAlunos = $chunk->all();
+        return view('alunos.home',['all'=>$allAlunos, 'pages' => $numPages]);
+    }
     public function listar (){
         $alunos = new AlunosModel;
         $all = $alunos::all();
-        return view('alunos.home',['all'=>$all]);
+        $n = 0;
+        foreach ($all  as $aluno){
+            $data_n = explode('-',$aluno->data_nascimento);
+            $data_n = $data_n[2].'-'.$data_n[1].'-'.$data_n[0];
+            
+            $allAlunos[$n] = [
+                'id' => $aluno->id,
+                'matricula' => $aluno->matriculado,
+                'nome' => $aluno->nome,
+                'email' => $aluno->email,
+                'datanascimento' => $data_n,
+                'telefone' => $aluno->telefone,
+                'certificados' => $this->numeroCertificados($aluno->id)
+            ];
+            $n++;
+        }
+        $allAlunos = collect($allAlunos);
+        $pages = sizeOf($allAlunos)/10;
+        if (!is_int($pages)){
+            $pages++;
+        }
+        for ($forPages =1; $forPages <= $pages ; $forPages++) { 
+            $numPages[$forPages] = $forPages;
+        }
+        $chunk = $allAlunos->forPage(1,10);
+        
+        $allAlunos = $chunk->all();
+        return view('alunos.home',['all'=>$allAlunos, 'pages' => $numPages]);
     }
 
     public function certificados(){
         $alunos = new AlunosModel;
         $all = $alunos::all();
-        return view('alunos.certificados',['all'=>$all]);
+        $n = 0;
+        foreach ($all  as $aluno){
+            $data_n = explode('-',$aluno->data_nascimento);
+            $data_n = $data_n[2].'-'.$data_n[1].'-'.$data_n[0];
+
+            $allAlunos[$n] = [
+                'id' => $aluno->id,
+                'matricula' => $aluno->matriculado,
+                'nome' => $aluno->nome,
+                'email' => $aluno->email,
+                'datanascimento' => $data_n,
+                'telefone' => $aluno->telefone,
+                'certificados' => $this->numeroCertificados($aluno->id)
+            ];
+            $n++;
+        }
+        return view('alunos.certificados',['all'=>$allAlunos]);
 
     }
 
