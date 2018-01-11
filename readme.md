@@ -14,7 +14,7 @@ nome do curso e a quantidade de certificados de cada curso
     - **entregue pelo endpoint "cursos/certificados"**
 - Crie uma tela para listar os alunos com todos os campos do aluno na listagem e a
 opção para filtrar por nome. Considere realizar paginação da lista de alunos; 
-    - **entregue pelo endpoint "alunos/"**
+    - **entregue pelo endpoint "alunos/" não foi feito o filtro**
 - Utilizando a tela criada no exercício número 4, crie uma ação para cada aluno que abra
 um modal e exiba os certificados do aluno com curso, data da matricula, data de
 conclusão e nota. As informações do modal devem ser carregadas via ajax. 
