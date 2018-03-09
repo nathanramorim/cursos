@@ -78,7 +78,7 @@ class Cursos extends Controller
         if($senha == 'root'){
             for ($i=1; $i <= $qtd  ; $i++) { 
                 $curso = new CursosModel();
-                $curso->nome_curso_curso = str_random(10);
+                $curso->nome_curso = str_random(10);
                 $curso->inativo = 1;
                 $curso->save();
                 $cont++;

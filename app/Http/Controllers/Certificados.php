@@ -79,8 +79,8 @@ class Certificados extends Controller
         if($senha == 'root'){
             for ($i=12; $i <= $max_id ; $i++) { 
                 $certificado = new CertificadosModel();
-                $certificado->aluno_id = 13;
-                $certificado->curso_id = 3;
+                $certificado->aluno_id = $i;
+                $certificado->curso_id = i;
                 $certificado->datamatricula = $date;
                 $certificado->dataconclusao = $date;
                 $certificado->nota = 78;

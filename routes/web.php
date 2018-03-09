@@ -11,10 +11,11 @@
 |
 */
 
-Route::get('/','Alunos@listar')->name('home');
+Route::get('/','Alunos@index')->name('home');
+Route::get('/page/{page}','Alunos@listar')->name('home-page');
 
 Route::prefix('/alunos')->group(function () {
-    Route::get('/', 'Alunos@listar')->name('aluno-listar');
+    Route::get('/', 'Alunos@index')->name('aluno-listar');
     Route::get('page/{page}', 'Alunos@pagination')->name('aluno-pagination');
     Route::get('certificados', 'Alunos@certificados')->name('aluno-certificado');
     Route::get('cadastrar', 'Alunos@showInsert')->name('aluno-cadastrar');

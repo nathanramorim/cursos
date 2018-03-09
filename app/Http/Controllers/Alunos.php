@@ -13,6 +13,9 @@ class Alunos extends Controller
     public function showInsert(){
         return view('alunos.cadastrar');
     }
+    public function index(){
+        return $this->listar(1);
+    }
 
     public function insert(Request $request){
         $date = Carbon::now()->toDateTimeString();
@@ -34,6 +37,8 @@ class Alunos extends Controller
     public function pagination ($page){
         $alunos = new AlunosModel;
         $all = $alunos::all();
+        $allAlunos = [];
+        $numPages = [];
         $n = 0;
         foreach ($all  as $aluno){
             $data_n = explode('-',$aluno->data_nascimento);
@@ -63,9 +68,11 @@ class Alunos extends Controller
         $allAlunos = $chunk->all();
         return view('alunos.home',['all'=>$allAlunos, 'pages' => $numPages]);
     }
-    public function listar (){
+    public function listar ($page){
         $alunos = new AlunosModel;
         $all = $alunos::all();
+        $allAlunos = [];
+        $numPages = [];
         $n = 0;
         foreach ($all  as $aluno){
             $data_n = explode('-',$aluno->data_nascimento);
@@ -90,7 +97,7 @@ class Alunos extends Controller
         for ($forPages =1; $forPages <= $pages ; $forPages++) { 
             $numPages[$forPages] = $forPages;
         }
-        $chunk = $allAlunos->forPage(1,10);
+        $chunk = $allAlunos->forPage($page,10);
         
         $allAlunos = $chunk->all();
         return view('alunos.home',['all'=>$allAlunos, 'pages' => $numPages]);
@@ -99,6 +106,8 @@ class Alunos extends Controller
     public function certificados(){
         $alunos = new AlunosModel;
         $all = $alunos::all();
+        $allAlunos = [];
+        $numPages = [];
         $n = 0;
         foreach ($all  as $aluno){
             $data_n = explode('-',$aluno->data_nascimento);

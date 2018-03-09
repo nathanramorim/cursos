@@ -23,7 +23,6 @@
             </thead>
             <tbody>
                 @foreach ($all as $aluno)
-                    @if ($aluno['certificados'] >= 100)
                         <tr>
                             <th scope="row">{{$aluno['matricula']}}</th>
                             <td>{{$aluno['nome']}}</td>
@@ -36,7 +35,6 @@
                                 <a class="btn btn-sm btn-danger" href="{{url('alunos/deletar/'.$aluno['id'])}}"><i class="fa fa-times" aria-hidden="true"></i></a>
                             </td>
                         </tr> 
-                    @endif
                 @endforeach
             </tbody>
         </table>
